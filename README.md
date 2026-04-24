@@ -7,7 +7,7 @@ Automated test scripts for Web and Android using Robot Framework and Selenium
 ### Project Overview
 This repository contains automated test cases for an Android application using **Robot Framework** and **Appium Library**. The goal of this project is to practice and demonstrate mobile automation techniques, including handling complex UI elements and gestures.
 
-### 🚀 Key Features Tested
+###  Key Features Tested
 * **Login Validation:** Testing input fields, clearing text, and verifying error messages using FOR loops.
 * **Date & Time Pickers:** Automating date/time selection using direct input and dialog interaction.
 * **Complex UI Elements:** Handling Select Boxes and Radio Buttons.
