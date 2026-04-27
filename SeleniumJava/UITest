@@ -142,7 +142,7 @@ public class AutoTest {
     }
 
     // Test Case: Handling JavaScript Alerts
-    public void aleart() throws InterruptedException{
+    public void alert() throws InterruptedException{
         driver.findElement(By.id("alertBtn")).click();
         driver.switchTo().alert().accept();
 
@@ -190,7 +190,21 @@ public class AutoTest {
             sleepTime(2);
         }
     }
+    // Test Case : Form Input
+      public void form() throws InterruptedException{
 
+        String [] input = {"Swe", "Zin", "Aye"};
+        Thread.sleep(2000);
+
+        for(int i = 1; i <= 3; i++){
+            driver.findElement(By.id("input" + i)).sendKeys(input[i-1]);
+            Thread.sleep(2000);
+            driver.findElement(By.id("btn"+i)).click();
+            Thread.sleep(2000);
+        }
+
+        System.out.println("Form Success!");
+    }
     // Execution sequence
     public void main() throws InterruptedException{
         openBrowser();
@@ -200,10 +214,11 @@ public class AutoTest {
         uploadImage();
         table();
         pagination();
-        aleart();
+        alert();
         mouse();
         slider();
         brokenCode();
+        form();
     }
 
     public static void main(String[] args) throws InterruptedException {
