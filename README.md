@@ -81,3 +81,28 @@ This section contains automated test suites designed to verify Web UI functional
     ```bash
     robot Robot-Framework-Web/
     ```
+---
+
+##  Java Selenium Automation
+
+**Project:** SauceDemo E2E Flow  
+**Stack:** Java + Selenium WebDriver (Chrome)
+
+###  Key Scenarios
+* **Negative Login:** Tested error pop-ups for empty/wrong passwords.
+* **Cart Logic:** Automated Add/Remove items and verified UI states.
+* **Data Scrape:** Extracted pricing and tax details using **XPath/CSS**.
+* **Full E2E Journey:** Complete flow from Login ➔ Checkout ➔ Payment ➔ Logout.
+
+###  Tech Stack
+* **Language:** Java
+* **Library:** Selenium WebDriver
+* **Browser:** Chrome (ChromeDriver)
+
+###  Structure
+* `src/main/java/org/example/SauceDemo.java`
+
+###  Quick Run
+1. Run `SauceDemo.java` as a standard Java application.
+2. Check the **Console Output** for step-by-step logs.
+3. Ensure **ChromeDriver** is compatible with your Chrome version.    
