@@ -105,4 +105,26 @@ This section contains automated test suites designed to verify Web UI functional
 ###  Quick Run
 1. Run `SauceDemo.java` as a standard Java application.
 2. Check the **Console Output** for step-by-step logs.
-3. Ensure **ChromeDriver** is compatible with your Chrome version.    
+3. Ensure **ChromeDriver** is compatible with your Chrome version.
+
+#  Java Selenium UI Automation Suite
+An end-to-end automated test suite covering comprehensive UI components and user interactions using **Java** and **Selenium WebDriver**.
+
+##  Key Automation Features
+* **Form Handling:** Automated dynamic inputs, Radio buttons, and Multi-select checkboxes.
+* **Complex UI Elements:** Tested Date Pickers, Sliders, and File Upload functionality.
+* **JS Interactions:** Handled JavaScript Alerts (Simple, Confirm, Prompt) and Window Tabs.
+* **Advanced Actions:** Implemented Mouse Actions including **Double-Click** and **Drag-and-Drop**.
+* **Data Scraping:** Extracted data from Static Tables and automated Pagination navigation.
+* **Link Validation:** Implemented checks for broken links and navigation stability.
+
+##  Tech Stack
+* **Language:** Java
+* **Tool:** Selenium WebDriver
+* **Browser:** Chrome
+* **Design Pattern:** Component-based Test Script
+
+## ⚙️ How to Run
+1. Clone this repository.
+2. Ensure **ChromeDriver** is configured in your environment.
+3. Run `AutoTest.java` as a standard Java application.
