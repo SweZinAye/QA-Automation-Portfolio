@@ -1,1 +1,217 @@
+package zinzin;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+public class AutoTest {
+    private WebDriver driver;
+
+    // Constructor: Initialize Chrome Browser
+    public AutoTest(){
+        driver = new ChromeDriver();
+    }
+
+    // Navigate to the website and maximize the window
+    public void openBrowser(){
+        driver.get("https://testautomationpractice.blogspot.com/");
+        driver.manage().window().maximize();
+        System.out.println("Test 1: Browser Opened Successfully!");
+    }
+
+    // Helper method for handling sleep time in seconds
+    static void sleepTime(long seconds){
+        try {
+            Thread.sleep(seconds*1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Test Case: Automated Form Inputs (Textfields, Radios, Checkboxes)
+    public void userInfos(){
+        // Locate inputs starting with 'Enter' placeholder and fill data
+        List<WebElement> inputs = driver.findElements(By.xpath("//*[starts-with(@placeholder,'Enter')]"));
+        String[] inputValues = {"Zin", "zin@email.com", "09435435"};
+        
+        for(int i=0; i<inputs.size(); i++){
+            inputs.get(i).sendKeys(inputValues[i]);
+            sleepTime(1);
+        }
+        
+        driver.findElement(By.id("textarea")).sendKeys("Yangon, Myanmar");
+        sleepTime(1);
+        
+        // Select Gender
+        driver.findElement(By.id("male")).click();
+        sleepTime(1);
+        driver.findElement(By.id("female")).click();
+        
+        // Loop through and check all days of the week
+        String[] allCheckedBoxes = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        for(String checkbox : allCheckedBoxes){
+            driver.findElement(By.xpath("//label[text()='"+checkbox+"']")).click();
+            sleepTime(1);
+        }
+        
+        // Click all elements with 'form-check-input' class
+        List<WebElement> form_check_inputs = driver.findElements(By.className("form-check-input"));
+        for(WebElement element : form_check_inputs){
+           element.click();
+        }
+
+        System.out.println("Test 2: User Info and Form Fields Success!");
+    }
+
+    // Test Case: Dropdown (Select) element handling
+    public void select() throws InterruptedException{
+        WebElement country = driver.findElement(By.id("country"));
+        Select select = new Select(country);
+        select.selectByValue("japan");
+
+        // Select colors and animals using values
+        Select color = new Select(driver.findElement(By.id("colors")));
+        color.selectByValue("yellow");
+        color.selectByValue("red");
+
+        Select animal = new Select(driver.findElement(By.id("animals")));
+        animal.selectByValue("dog");
+        animal.selectByValue("cat");
+        System.out.println("Test 3: Dropdowns and Selections Success!");
+    }
+
+    // Test Case: Date Picker handling (Direct input and UI selection)
+    public void dateGroup() throws InterruptedException{
+        // Direct input into date field
+        driver.findElement(By.id("datepicker")).sendKeys("12/15/2025", Keys.ENTER);
+        
+        // Picking date from the UI Calendar
+        driver.findElement(By.id("txtDate")).click();
+        new Select(driver.findElement(By.className("ui-datepicker-month"))).selectByValue("7");
+        new Select(driver.findElement(By.className("ui-datepicker-year"))).selectByValue("2020");
+        driver.findElement(By.xpath("//*[@id=\"ui-datepicker-div\"]/table/tbody/tr[4]/td[5]/a")).click();
+
+        // Fill Start and End Date ranges
+        driver.findElement(By.id("start-date")).sendKeys("05/26/1999");
+        driver.findElement(By.id("end-date")).sendKeys("12/15/2025");
+        driver.findElement(By.className("submit-btn")).click();
+        
+        System.out.println("Test 4: Date Picker Result: " + driver.findElement(By.id("result")).getText());
+    }
+
+    // Test Case: File Uploading (Single and Multiple)
+    public void uploadImage() throws InterruptedException{
+        String imgPath = "/Users/ams/Documents/logo.jpeg"; // Ensure this path is correct on your local machine
+        driver.findElement(By.id("singleFileInput")).sendKeys(imgPath);
+        driver.findElement(By.xpath("//*[@id=\"singleFileForm\"]/button")).click();
+        
+        System.out.println("Test 5: Image Upload Process Completed!");
+    }
+
+    // Test Case: Scraping and printing Static Table data
+    public void table(){
+        System.out.println("=========== Scraping Static Table Data ===========");
+        WebElement table = driver.findElement(By.name("BookTable"));
+        List<WebElement> rows = table.findElements(By.tagName("tr"));
+        for(WebElement row : rows ){
+            List<WebElement> cells = row.findElements(By.tagName(row == rows.get(0) ? "th" : "td"));
+            for(WebElement cell : cells){
+                System.out.print(cell.getText() + " | ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Test Case: Handling Table Pagination
+    public void pagination() throws InterruptedException{
+        System.out.println("------ Starting Pagination Test ------");
+        for(int i = 1 ; i <= 4; i++){
+            driver.findElement(By.linkText(i + "")).click();
+            System.out.println("Navigated to Page: " + i);
+            sleepTime(1);
+        }
+    }
+
+    // Test Case: Handling JavaScript Alerts
+    public void aleart() throws InterruptedException{
+        driver.findElement(By.id("alertBtn")).click();
+        driver.switchTo().alert().accept();
+
+        driver.findElement(By.id("confirmBtn")).click();
+        driver.switchTo().alert().accept();
+
+        driver.findElement(By.id("promptBtn")).click();
+        Alert alert = driver.switchTo().alert();
+        alert.sendKeys("ZinZin Automation");
+        alert.accept();
+        System.out.println("Test 6: All Alerts Handled Successfully!");
+    }
+
+    // Test Case: Mouse Actions (Double Click and Drag & Drop)
+    public void mouse() throws InterruptedException{
+        WebElement field1 =  driver.findElement(By.id("field1"));
+        field1.clear();
+        field1.sendKeys("Automation Pro");
+        
+        // Perform Double Click to copy text
+        WebElement copyTextBtn = driver.findElement(By.xpath("//*[@id=\"HTML10\"]/div[1]/button"));
+        new Actions(driver).doubleClick(copyTextBtn).perform();
+        
+        // Perform Drag and Drop
+        WebElement draggable = driver.findElement(By.id("draggable"));
+        WebElement droppable = driver.findElement(By.id("droppable"));
+        new Actions(driver).dragAndDrop(draggable, droppable).perform();
+        System.out.println("Test 7: Mouse Interactions Success!");
+    }
+
+    // Test Case: Slider manipulation
+    public void slider() throws InterruptedException{
+        WebElement slider = driver.findElement(By.xpath("//*[@id=\"slider-range\"]/span[1]"));
+        new Actions(driver).dragAndDropBy(slider, 60, 0).perform();
+        System.out.println("Test 8: Slider Adjustment Success!");
+    }
+
+    // Test Case: Checking Broken Links
+    public void brokenCode() throws InterruptedException{
+        System.out.println("------ Checking Broken Links ------");
+        for(int i = 1; i <= 3; i++){
+            driver.findElement(By.xpath("//*[@id=\"broken-links\"]/a[%d]".formatted(i))).click();
+            sleepTime(1);
+            driver.navigate().back();
+            sleepTime(2);
+        }
+    }
+
+    // Execution sequence
+    public void main() throws InterruptedException{
+        openBrowser();
+        userInfos();
+        select();
+        dateGroup();
+        uploadImage();
+        table();
+        pagination();
+        aleart();
+        mouse();
+        slider();
+        brokenCode();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        AutoTest testRunner = new AutoTest();
+        testRunner.main();
+        
+        sleepTime(5);
+        testRunner.driver.quit(); // Properly close the browser session
+        System.out.println("=== Full E2E Test Suite Completed ===");
+    }
+}
