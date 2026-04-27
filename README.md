@@ -58,7 +58,7 @@ This section contains automated test suites designed to verify Web UI functional
     * **JS Interactions:** Handling Alerts/Pop-ups and Drag-and-Drop actions.
     * **Web Tables:** Extracting and logging data from dynamic tables using WebElements.
 
-### 🛠 Tech Stack (Web)
+###  Tech Stack (Web)
 * **Framework:** Robot Framework
 * **Library:** SeleniumLibrary
 * **Browser:** Chrome (ChromeDriver)
@@ -68,7 +68,7 @@ This section contains automated test suites designed to verify Web UI functional
 * `Robot-Framework-Web/saucedemo_test.robot` - Shopping flow script.
 * `Robot-Framework-Web/ui_elements_test.robot` - UI component interaction script.
 
-### ⚙️ How to Setup & Run (Web)
+###  How to Setup & Run (Web)
 1.  **Install Requirements:**
     ```bash
     pip install robotframework-seleniumlibrary
@@ -124,7 +124,7 @@ An end-to-end automated test suite covering comprehensive UI components and user
 * **Browser:** Chrome
 * **Design Pattern:** Component-based Test Script
 
-## ⚙️ How to Run
+##  How to Run
 1. Clone this repository.
 2. Ensure **ChromeDriver** is configured in your environment.
 3. Run `AutoTest.java` as a standard Java application.
